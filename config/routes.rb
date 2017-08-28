@@ -1,12 +1,18 @@
 Rails.application.routes.draw do
-  
-  resources :topics do
-    resources :bookmarks, except: [:index]
+  devise_for :users
+
+  # this didn't work as expected
+  authenticated :user do
+   root 'topics#index', as: :authenticated_root
   end
 
   root 'welcome#index'
 
-  devise_for :users
+  resources :topics do
+    resources :bookmarks, except: [:index]
+  end
+
+  post :incoming, to: 'incoming#create'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

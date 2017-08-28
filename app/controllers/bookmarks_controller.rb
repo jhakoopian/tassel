@@ -1,8 +1,8 @@
 class BookmarksController < ApplicationController
   before_action :set_topic
+  before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
 
   def show
-    @bookmark = Bookmark.find(params[:id])
   end
 
   def new
@@ -12,6 +12,7 @@ class BookmarksController < ApplicationController
   def create
     @topic = Topic.find(params[:topic_id])
     @bookmark = @topic.bookmarks.new(bookmark_params)
+    @bookmark.user = current_user
 
     if @bookmark.save
       flash[:notice] = "\"#{@bookmark.url}\" was added to your bookmarks."
@@ -23,11 +24,9 @@ class BookmarksController < ApplicationController
   end
 
   def edit
-    @bookmark = Bookmark.find(params[:id])
   end
 
   def update
-    @bookmark = Bookmark.find(params[:id])
     @bookmark.assign_attributes(bookmark_params)
 
     if @bookmark.update_attributes(bookmark_params)
@@ -40,8 +39,6 @@ class BookmarksController < ApplicationController
   end
 
   def destroy
-    @bookmark = Bookmark.find(params[:id])
-
     if @bookmark.destroy
       flash[:notice] = "\"#{@bookmark.url}\" was removed from your bookmarks."
       redirect_to @bookmark.topic
@@ -58,5 +55,10 @@ class BookmarksController < ApplicationController
 
   def set_topic
     @topic = Topic.find(params[:topic_id])
+  end
+
+  def set_bookmark
+    @bookmark = Bookmark.find(params[:id])
+    authorize @bookmark
   end
 end

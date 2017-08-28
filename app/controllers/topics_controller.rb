@@ -1,10 +1,11 @@
 class TopicsController < ApplicationController
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
+
   def index
     @topics = Topic.all
   end
 
   def show
-    @topic = Topic.find(params[:id])
   end
 
   def new
@@ -23,11 +24,9 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topic = Topic.find(params[:id])
   end
 
   def update
-    @topic = Topic.find(params[:id])
     @topic.assign_attributes(topic_params)
 
     if @topic.update_attributes(topic_params)
@@ -40,7 +39,6 @@ class TopicsController < ApplicationController
   end
 
   def destroy
-    @topic = Topic.find(params[:id])
 
     if @topic.destroy
       flash[:notice] = "\"#{@topic.title}\" was deleted successfully."
@@ -51,7 +49,13 @@ class TopicsController < ApplicationController
     end
   end
 
+  private
   def topic_params
     params.require(:topic).permit(:title)
+  end
+
+  def set_topic
+    @topic = Topic.find(params[:id])
+    authorize @topic
   end
 end
