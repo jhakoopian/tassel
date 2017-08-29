@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'likes/index'
-
   devise_for :users
 
-  # this didn't work as expected
+  resources :users, only: [:show]
+
+  # This didn't work as expected. I can no longer access the welcome index page as an authenticated user.
   authenticated :user do
    root 'topics#index', as: :authenticated_root
   end

@@ -15,7 +15,7 @@ class BookmarksController < ApplicationController
 
     if @bookmark.save
       flash[:notice] = "\"#{@bookmark.url}\" was added to your bookmarks."
-      redirect_to @topic
+      redirect_to @bookmark.topic
     else
       flash.now[:alert] = "There was an error adding \"#{@bookmark.url}\" from your bookmarks. Please try again."
       render :new
@@ -30,7 +30,7 @@ class BookmarksController < ApplicationController
 
     if @bookmark.update_attributes(bookmark_params)
       flash[:notice] = "Your bookmark was updated."
-      redirect_to @topic
+      redirect_to @bookmark.topic
     else
       flash.now[:alert] = "There was an error updating your bookmark. Please try again."
       render :edit
@@ -40,7 +40,7 @@ class BookmarksController < ApplicationController
   def destroy
     if @bookmark.destroy
       flash[:notice] = "\"#{@bookmark.url}\" was removed from your bookmarks."
-      redirect_to @bookmark.topic
+      redirect_to(request.referrer)
     else
       flash.now[:alert] = "There was an error removing \"#{@bookmark.url}\" from your bookmarks. Please try again."
       render :show

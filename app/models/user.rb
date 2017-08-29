@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
   has_many :topics
-  has_many :bookmarks
+  has_many :bookmarks, dependent: :destroy
   has_many :likes, dependent: :destroy
 
   def liked(bookmark)

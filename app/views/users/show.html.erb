@@ -1,0 +1,33 @@
+<h1>Your Bookmarks</h1>
+<% @user_bookmarks.each do |user_bookmark| %>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>
+        <%= link_to user_bookmark.url, user_bookmark.url, target: '_blank' %>
+      </h4>
+    </div>
+    <div class="button">
+      <%= render partial: 'likes/like', locals: { bookmark: user_bookmark } %>
+    </div>
+    <div class="button">
+      <%= link_to "Edit", edit_topic_bookmark_path(user_bookmark.topic, user_bookmark), class: 'btn btn-success' %>
+    </div>
+    <div class="button">
+      <%= link_to "Delete", [user_bookmark.topic, user_bookmark], method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this bookmark?' } %>
+    </div>
+  </div>
+<% end %>
+
+<h1>Liked Bookmarks</h1>
+<% @liked_bookmarks.each do |liked_bookmark| %>
+  <div class="row">
+    <div class="col-xs-6">
+      <h4>
+        <%= link_to liked_bookmark.bookmark.url, liked_bookmark.bookmark.url, target: '_blank' %>
+      </h4>
+    </div>
+    <div class="button">
+      <%= render partial: 'likes/like', locals: { bookmark: liked_bookmark.bookmark } %>
+    </div>
+  </div>
+<% end %>
