@@ -1,17 +1,17 @@
 <h1>Topics</h1>
 <% @topics.each do |topic| %>
   <div class="row">
-    <div class="col-md-6 col-xs-7">
+    <div class="col-xs-6">
       <h4>
         <%= link_to topic.title, topic %>
       </h4>
     </div>
-    <div class="col-md-1 col-xs-2">
+    <div class="button">
       <% if policy(topic).destroy? %>
         <%= link_to "Edit", edit_topic_path(topic), class: 'btn btn-success' %>
       <% end %>
     </div>
-    <div class="col-xs-2">
+    <div class="button">
       <% if policy(topic).destroy? %>
         <%= link_to "Delete", topic, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this topic?' } %>
       <% end %>
