@@ -18,11 +18,9 @@ ActiveRecord::Schema.define(version: 20170828025736) do
     t.integer  "topic_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer  "user_id"
   end
 
   add_index "bookmarks", ["topic_id"], name: "index_bookmarks_on_topic_id"
-  add_index "bookmarks", ["user_id"], name: "index_bookmarks_on_user_id"
 
   create_table "likes", force: :cascade do |t|
     t.integer  "bookmark_id"
@@ -30,6 +28,9 @@ ActiveRecord::Schema.define(version: 20170828025736) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
   end
+
+  add_index "likes", ["bookmark_id"], name: "index_likes_on_bookmark_id"
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id"
 
   create_table "topics", force: :cascade do |t|
     t.string   "title"

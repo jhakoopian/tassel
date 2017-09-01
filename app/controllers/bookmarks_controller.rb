@@ -11,7 +11,6 @@ class BookmarksController < ApplicationController
 
   def create
     @bookmark = @topic.bookmarks.new(bookmark_params)
-    @bookmark.user = current_user
 
     if @bookmark.save
       flash[:notice] = "\"#{@bookmark.url}\" was added to your bookmarks."

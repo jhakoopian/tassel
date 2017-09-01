@@ -1,8 +1,9 @@
 class Bookmark < ActiveRecord::Base
   before_save :fix_url
   belongs_to :topic
-  belongs_to :user
   has_many :likes, dependent: :destroy
+
+  delegate :user, to: :topic
 
   private
   def fix_url

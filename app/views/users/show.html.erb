@@ -23,11 +23,11 @@
   <div class="row">
     <div class="col-xs-6">
       <h4>
-        <%= link_to liked_bookmark.bookmark.url, liked_bookmark.bookmark.url, target: '_blank' %>
+        <%= link_to liked_bookmark.url, liked_bookmark.url, target: '_blank' %>
       </h4>
     </div>
     <div class="button">
-      <%= render partial: 'likes/like', locals: { bookmark: liked_bookmark.bookmark } %>
+      <%= render partial: 'likes/like', locals: { bookmark: liked_bookmark } %>
     </div>
   </div>
 <% end %>
