@@ -2,15 +2,15 @@
 <% @user_topics.each do |user_topic| %>
   <h2><%= user_topic.title %></h2>
   <% @user_bookmarks.each do |user_bookmark| %>
-    <div class="row">
-      <div class="col-xs-6">
-        <% if user_bookmark.topic_id == user_topic.id %>
+    <% if user_bookmark.topic_id == user_topic.id %>
+      <div class="row">
+        <div class="col-xs-6">
           <h4><%= link_to user_bookmark.url, user_bookmark.url, target: '_blank' %></h4>
-        <% end %>
+        </div>
+        <div class="button">
+          <%= render partial: 'likes/like', locals: { bookmark: user_bookmark } %>
+        </div>
       </div>
-      <div class="button">
-        <%= render partial: 'likes/like', locals: { bookmark: user_bookmark } %>
-      </div>
-    </div>
+    <% end %>
   <% end %>
 <% end %>
