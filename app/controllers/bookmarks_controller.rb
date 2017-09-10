@@ -13,6 +13,7 @@ class BookmarksController < ApplicationController
     @bookmark = @topic.bookmarks.new(bookmark_params)
 
     if @bookmark.save
+      current_user.likes.create(bookmark: @bookmark)
       flash[:notice] = "\"#{@bookmark.url}\" was added to your bookmarks."
       redirect_to @bookmark.topic
     else

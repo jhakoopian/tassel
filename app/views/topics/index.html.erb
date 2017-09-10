@@ -7,7 +7,7 @@
       </h4>
     </div>
     <div class="button">
-      <% if policy(topic).destroy? %>
+      <% if policy(topic).update? %>
         <%= link_to "Edit", edit_topic_path(topic), class: 'btn btn-success' %>
       <% end %>
     </div>

@@ -13,7 +13,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topic = current_user.topics.new(topic_params)
+    @topic = Topic.new(topic_params)
 
     if @topic.save
       redirect_to topics_path, notice: "Your topic was saved successfully."

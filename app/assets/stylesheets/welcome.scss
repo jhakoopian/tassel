@@ -1,3 +1,38 @@
 // Place all the styles related to the welcome controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.jumbotron {
+  margin-top: 20px;
+  min-height: 88%;  /* Fallback for browsers do NOT support vh unit */
+  min-height: 88vh;
+  color: white;
+  background-color: darkgray;
+  cursor: default;
+}
+
+.bullet-points {
+  margin-top: 70px;
+}
+
+p {
+  transition:.2s;
+}
+
+p:hover {
+  color: rgb(200, 200, 200);
+  transition:.2s;
+}
+
+@media only screen and (max-width: 667px) {
+  .bullet-points { margin-top: 40px; }
+}
+
+@media only screen and (max-width: 375px) {
+  .jumbotron {
+    margin-top: 100px;
+    min-height: 80%;  /* Fallback for browsers do NOT support vh unit */
+    min-height: 80vh;
+  }
+  .bullet-points { margin-top: 50px; }
+}

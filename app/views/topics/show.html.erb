@@ -10,7 +10,7 @@
       <%= render partial: 'likes/like', locals: { bookmark: bookmark } %>
     </div>
     <div class="button">
-      <% if policy(bookmark).destroy? %>
+      <% if policy(bookmark).update? %>
         <%= link_to "Edit", edit_topic_bookmark_path(bookmark.topic, bookmark), class: 'btn btn-success' %>
       <% end %>
     </div>
